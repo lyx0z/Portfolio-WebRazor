@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Portfolio.Web/Portfolio.Web.csproj" />
+  <Project Path="GameOfLife.Core/GameOfLife.Core.csproj" />
+  <Project Path="GameOfLife.Test.Units/GameOfLife.Test.Units.csproj" />
+</Solution>

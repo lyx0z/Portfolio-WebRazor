@@ -1,0 +1,88 @@
+@page "/gameoflife"
+@using GameOfLife.Core
+
+<PageTitle>Game of Life | lyx0z</PageTitle>
+
+<section class="board-page">
+    <header class="board-header">
+        <a class="back-link" href="/#projects">← All projects</a>
+        <h1>Game of <span class="gradient-text">Life</span></h1>
+        <p>Conway's cellular automaton. Set the size, pick how many cells start alive, and watch it run.</p>
+    </header>
+
+    <div class="panel">
+        <div class="controls">
+            <label>
+                <span>Height</span>
+                <input type="number" min="1" max="100" @bind="Height" />
+            </label>
+
+            <label>
+                <span>Width</span>
+                <input type="number" min="1" max="100" @bind="Width" />
+            </label>
+
+            <label>
+                <span>Alive cells</span>
+                <input type="number" min="0" @bind="AliveCount" />
+            </label>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-accent" @onclick="OnConfigSubmit">Create Board</button>
+            <button class="btn btn-ghost" @onclick="Start" disabled="@(game is null || isRunning)">Resume</button>
+            <button class="btn btn-ghost" @onclick="Stop" disabled="@(!isRunning)">Pause</button>
+        </div>
+    </div>
+
+    @if (Cells is not null)
+    {
+        <div class="board">
+            @for (var row = 0; row < Cells!.GetLength(0); row++)
+            {
+                <div class="board-row">
+                    @for (var col = 0; col < Cells!.GetLength(1); col++)
+                    {
+                        <div class="cell @(Cells![row, col] ? "alive" : "dead")"></div>
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="empty-hint">Set your values and hit <strong>Create Board</strong> to start.</p>
+    }
+</section>
+
+@code {
+    private int Height = 20;
+    private int Width = 20;
+    private int AliveCount = 100;
+
+    private bool isRunning;
+    private Game? game;
+    private bool[,]? Cells;
+
+    private async Task OnConfigSubmit()
+    {
+        isRunning = false;
+        game = new Game(Width, Height, AliveCount);
+        await Start();
+    }
+
+    private async Task Start()
+    {
+        if (isRunning) return;
+        isRunning = true;
+
+        while (isRunning)
+        {
+            Cells = game!.GetNextFrame();
+            StateHasChanged();
+            await Task.Delay(200);
+        }
+    }
+
+    private void Stop() => isRunning = false;
+}

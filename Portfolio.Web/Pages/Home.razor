@@ -1,0 +1,129 @@
+@page "/"
+
+<PageTitle>lyx0z</PageTitle>
+
+<section class="hero">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="hero-content">
+        <div class="avatar">
+            <img src="img/pfp.jpg" alt="lyx0z" width="180" height="180" />
+        </div>
+
+        <div class="hero-text">
+            <span class="eyebrow">Software Engineer Apprentice</span>
+
+            <h1 class="hero-title">
+                <span class="gradient-text">Hi, I'm lyx0z.</span><br />
+                <span>I build things in C#.</span>
+            </h1>
+
+            <p class="hero-sub">
+                Apprentice software engineer with a soft spot for code that stays readable.
+                Currently picking up Linux and Rust on the side. Off the clock you'll find me
+                with a guitar or a bass in my hands, or somewhere in a Dota lobby.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btn btn-accent" href="/#projects">See my projects</a>
+                <a class="btn btn-ghost" href="learning">Learn with me</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="projects">
+    <div class="section-inner">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-lead">Things I've built, from small experiments to finished pieces. More coming as I go.</p>
+
+        <div class="project-grid">
+            <a class="project" href="gameoflife">
+                <div class="project-top">
+                    <span class="project-icon">▦</span>
+                    <span class="project-arrow">→</span>
+                </div>
+                <h3>Conway's Game of Life</h3>
+                <p>
+                    A cellular automaton running in the browser. The rules and board logic live in their own
+                    project with unit tests, and the web page only renders the state and drives the animation.
+                </p>
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">Blazor WebAssembly</span>
+                    <span class="tag">NUnit</span>
+                </div>
+            </a>
+
+            <a class="project" href="https://github.com/lyx0z/Notepad" target="_blank" rel="noopener noreferrer">
+                <div class="project-top">
+                    <span class="project-icon">✎</span>
+                    <span class="project-arrow">↗</span>
+                </div>
+                <h3>Notepad</h3>
+                <p>
+                    A text editor in C#. File handling sits in its own FileUtils project, which was my first
+                    real attempt at keeping logic out of the app that consumes it.
+                </p>
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">File IO</span>
+                    <span class="tag">Multi project solution</span>
+                </div>
+            </a>
+        </div>
+
+        <a class="learn-banner" href="learning">
+            <div>
+                <h3>Learn with me</h3>
+                <p>Every exercise repo from C# basics through collections, plus where I am with Rust.</p>
+            </div>
+            <span class="project-arrow">→</span>
+        </a>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <div class="section-inner">
+        <h2 class="section-title">About me</h2>
+
+        <div class="about-grid">
+            <p class="about-text">
+                I'm a software engineering apprentice. C# is where I'm most at home and most of what I build
+                starts there. Right now I'm learning Linux and Rust to get a better feel for what actually happens
+                underneath the frameworks. I care about code that still makes sense six months later: small classes,
+                clear names, and logic kept apart from the UI that shows it.
+            </p>
+
+            <div class="about-cards">
+                <div class="card">
+                    <h3>Comfortable with</h3>
+                    <div class="tags">
+                        <span class="tag tag-strong">C#</span>
+                        <span class="tag tag-strong">.NET</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Learning right now</h3>
+                    <div class="tags">
+                        <span class="tag">Blazor</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Rust</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Away from the keyboard</h3>
+                    <div class="tags">
+                        <span class="tag">Guitar</span>
+                        <span class="tag">Bass</span>
+                        <span class="tag">Dota</span>
+                        <span class="tag">Warcraft</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

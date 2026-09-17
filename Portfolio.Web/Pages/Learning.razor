@@ -1,0 +1,120 @@
+@page "/learning"
+
+<PageTitle>Learn with me | lyx0z</PageTitle>
+
+<section class="learn-page">
+    <header class="learn-header">
+        <span class="eyebrow">Learn with me</span>
+        <h1>Everything I'm <span class="gradient-text">learning</span>, in public.</h1>
+        <p>
+            Every exercise, every rough draft, every thing that took me three tries.
+            All of it lives on GitHub so you can follow the same path, or see where I am right now.
+        </p>
+    </header>
+
+    @foreach (var track in tracks)
+    {
+        <div class="track">
+            <div class="track-head">
+                <h2>@track.Name</h2>
+                <span class="track-meta">@track.Meta</span>
+            </div>
+
+            <div class="steps">
+                @foreach (var repo in track.Repos)
+                {
+                    <a class="step @(repo.IsCurrent ? "current" : "")"
+                       href="@repo.Url" target="_blank" rel="noopener noreferrer">
+                        <div class="step-marker">
+                            <span class="step-dot"></span>
+                        </div>
+
+                        <div class="step-body">
+                            <div class="step-title">
+                                <h3>@repo.Title</h3>
+                                @if (repo.IsCurrent)
+                                {
+                                    <span class="badge-current">Currently here</span>
+                                }
+                            </div>
+
+                            <p>@repo.Summary</p>
+
+                            <div class="tags">
+                                @foreach (var topic in repo.Topics)
+                                {
+                                    <span class="tag">@topic</span>
+                                }
+                            </div>
+                        </div>
+
+                        <span class="step-arrow">↗</span>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="learn-cta">
+        <p>Everything I write is public. Follow along or steal whatever is useful.</p>
+        <a class="btn btn-accent" href="https://github.com/lyx0z" target="_blank" rel="noopener noreferrer">
+            All repos on GitHub
+        </a>
+    </div>
+</section>
+
+@code {
+    private record Repo(string Title, string Summary, string Url, string[] Topics, bool IsCurrent = false);
+
+    private record Track(string Name, string Meta, Repo[] Repos);
+
+    private readonly Track[] tracks =
+    [
+        new Track("C#", "Three repos, in order", [
+            new Repo(
+                "Cs-Basics",
+                "Where I started. The compiler, first programs, operators, loops, arrays, a first look at OOP, and a set of debugging exercises to get used to reading errors instead of fearing them.",
+                "https://github.com/lyx0z/Cs-Basics",
+                ["First steps", "Operators", "Loops", "Arrays", "OOP", "Debugging"]
+            ),
+            new Repo(
+                "Cs-Intermediate",
+                "Past the syntax stage. Building bigger exercises where the structure of the code starts to matter as much as whether it runs.",
+                "https://github.com/lyx0z/Cs-Intermediate",
+                ["C#", "Exercises"]
+            ),
+            new Repo(
+                "Cs-Advanced",
+                "The one I'm working through right now. Currently on collections, which is the first topic where picking the wrong tool actually costs you something.",
+                "https://github.com/lyx0z/Cs-Advanced",
+                ["Collections"],
+                IsCurrent: true
+            )
+        ]),
+
+        new Track("Rust", "Just getting started", [
+            new Repo(
+                "Rust-Basics",
+                "A Cargo workspace I use to follow the Rust book. Hello World and the guessing game so far. Coming from C#, the borrow checker is the part that keeps humbling me.",
+                "https://github.com/lyx0z/Rust-Basics",
+                ["Cargo", "Hello World", "Guessing game"],
+                IsCurrent: true
+            )
+        ]),
+
+        new Track("Projects I built to learn", "Not exercises, actual programs", [
+            new Repo(
+                "Notepad",
+                "A text editor in C#. The file handling lives in its own FileUtils project, which was my first go at splitting logic out of the app that uses it.",
+                "https://github.com/lyx0z/Notepad",
+                ["C#", "File IO", "Multi project solution"]
+            ),
+            new Repo(
+                "GameOfLife",
+                "Conway's Game of Life with a console front end and a web front end sharing one engine. Taught me how to keep rules and rendering apart, and how unit tests make that pay off.",
+                "https://github.com/lyx0z/GameOfLife",
+                ["C#", "Blazor WebAssembly", "NUnit"]
+            )
+        ])
+    ];
+}

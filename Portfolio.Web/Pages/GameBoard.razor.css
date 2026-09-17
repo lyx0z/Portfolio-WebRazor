@@ -1,0 +1,202 @@
+.board-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+}
+
+/* ---------- Header ---------- */
+
+.board-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.18s ease;
+}
+
+.back-link:hover {
+    color: #fff;
+}
+
+.board-header h1 {
+    margin: 0 0 0.9rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #ff4ecd 0%, #b429f9 50%, #6f8cff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.board-header p {
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* ---------- Control panel ---------- */
+
+.panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.controls label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.controls span {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.controls input {
+    width: 108px;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.controls input:focus {
+    outline: none;
+    border-color: rgba(180, 41, 249, 0.6);
+    box-shadow: 0 0 0 3px rgba(180, 41, 249, 0.15);
+}
+
+/* ---------- Buttons ---------- */
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.btn {
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-accent {
+    color: #fff;
+    border: 1px solid rgba(255, 78, 205, 0.55);
+    background: rgba(255, 78, 205, 0.09);
+    box-shadow: 0 0 20px rgba(255, 78, 205, 0.15);
+}
+
+.btn-accent:hover:not(:disabled) {
+    background: rgba(255, 78, 205, 0.18);
+    box-shadow: 0 0 30px rgba(255, 78, 205, 0.28);
+    transform: translateY(-2px);
+}
+
+.btn-ghost {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+/* ---------- Board ---------- */
+
+.board {
+    display: inline-block;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.board-row {
+    display: flex;
+}
+
+.cell {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    margin: 1px;
+    transition: background 0.12s linear, box-shadow 0.12s linear;
+}
+
+.cell.dead {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.cell.alive {
+    background: linear-gradient(135deg, #ff4ecd 0%, #b429f9 100%);
+    box-shadow: 0 0 8px rgba(180, 41, 249, 0.6);
+}
+
+.empty-hint {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.95rem;
+}
+
+.empty-hint strong {
+    color: #fff;
+    font-weight: 500;
+}
+
+@media (max-width: 760px) {
+    .board-page {
+        padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
