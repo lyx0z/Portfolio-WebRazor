@@ -6,12 +6,15 @@
     document, its variables win, so every accent on the site re-colours the
     moment a value changes. Nothing else needs to know this component exists.
 
+    The three slots are labelled by gradient position, not colour name, since
+    any hex can go in any slot.
+
     The CSS string itself is built in ThemeCssBuilder.cs, not here, because
     Razor matches braces to find the end of an @code block and CSS is full
     of braces.
 *@
 
-<style>@((MarkupString)ThemeCssBuilder.Build(pink, purple, blue))</style>
+<style>@((MarkupString)ThemeCssBuilder.Build(start, mid, end))</style>
 
 <div class="theme-picker">
     <button class="theme-toggle" @onclick="Toggle" title="Theme">
@@ -24,25 +27,25 @@
         <div class="theme-panel">
             <div class="panel-head">
                 <strong>Palette</strong>
-                <span>Changes apply instantly</span>
+                <span>Three gradient stops, any colour</span>
             </div>
 
             <label class="row">
-                <input type="color" @bind="pink" @bind:event="oninput" />
-                <span class="row-name">Pink</span>
-                <code>@pink</code>
+                <input type="color" @bind="start" @bind:event="oninput" />
+                <span class="row-name">Start</span>
+                <code>@start</code>
             </label>
 
             <label class="row">
-                <input type="color" @bind="purple" @bind:event="oninput" />
-                <span class="row-name">Purple</span>
-                <code>@purple</code>
+                <input type="color" @bind="mid" @bind:event="oninput" />
+                <span class="row-name">Middle</span>
+                <code>@mid</code>
             </label>
 
             <label class="row">
-                <input type="color" @bind="blue" @bind:event="oninput" />
-                <span class="row-name">Blue</span>
-                <code>@blue</code>
+                <input type="color" @bind="end" @bind:event="oninput" />
+                <span class="row-name">End</span>
+                <code>@end</code>
             </label>
 
             <div class="preview" style="@PreviewStyle"></div>
@@ -61,6 +64,8 @@
                 }
             </div>
 
+            <button class="reset" @onclick="Reset">Reset to default</button>
+
             <p class="hint">
                 Happy with it? Paste these three into the <code>:root</code> block
                 in <code>wwwroot/css/app.css</code> to make it the default.
@@ -70,17 +75,22 @@
 </div>
 
 @code {
-    private record Preset(string Name, string Pink, string Purple, string Blue);
+    private record Preset(string Name, string Start, string Mid, string End);
+
+    // The defaults, kept in one place so Reset has something to point at.
+    private const string DefaultStart = "#ff5cc0";
+    private const string DefaultMid = "#8b5cf6";
+    private const string DefaultEnd = "#3b82f6";
 
     private bool open;
 
-    private string pink = "#ff5cc0";
-    private string purple = "#8b5cf6";
-    private string blue = "#3b82f6";
+    private string start = DefaultStart;
+    private string mid = DefaultMid;
+    private string end = DefaultEnd;
 
     private readonly Preset[] presets =
     [
-        new Preset("Blue lean (current)", "#ff5cc0", "#8b5cf6", "#3b82f6"),
+        new Preset("Blue lean (default)", "#ff5cc0", "#8b5cf6", "#3b82f6"),
         new Preset("Deep ocean",          "#e879f9", "#7c5cff", "#0ea5e9"),
         new Preset("Electric cyan",       "#f472b6", "#6366f1", "#22d3ee"),
         new Preset("Original hot pink",   "#ff4ecd", "#b429f9", "#6f8cff"),
@@ -89,17 +99,24 @@
     ];
 
     private string PreviewStyle =>
-        "background: linear-gradient(90deg, " + pink + ", " + purple + ", " + blue + ")";
+        "background: linear-gradient(90deg, " + start + ", " + mid + ", " + end + ")";
 
     private static string SwatchStyle(Preset p) =>
-        "background: linear-gradient(135deg, " + p.Pink + ", " + p.Purple + ", " + p.Blue + ")";
+        "background: linear-gradient(135deg, " + p.Start + ", " + p.Mid + ", " + p.End + ")";
 
     private void Toggle() => open = !open;
 
     private void Apply(Preset p)
     {
-        pink = p.Pink;
-        purple = p.Purple;
-        blue = p.Blue;
+        start = p.Start;
+        mid = p.Mid;
+        end = p.End;
+    }
+
+    private void Reset()
+    {
+        start = DefaultStart;
+        mid = DefaultMid;
+        end = DefaultEnd;
     }
 }

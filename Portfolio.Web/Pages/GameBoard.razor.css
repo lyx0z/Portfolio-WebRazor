@@ -33,7 +33,7 @@
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-purple) 50%, var(--accent-blue) 100%);
+    background: linear-gradient(90deg, var(--accent-start) 0%, var(--accent-mid) 50%, var(--accent-end) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -95,8 +95,8 @@
 
 .controls input:focus {
     outline: none;
-    border-color: rgb(var(--accent-purple-rgb) / 0.6);
-    box-shadow: 0 0 0 3px rgb(var(--accent-purple-rgb) / 0.15);
+    border-color: rgb(var(--accent-mid-rgb) / 0.6);
+    box-shadow: 0 0 0 3px rgb(var(--accent-mid-rgb) / 0.15);
 }
 
 /* ---------- Buttons ---------- */
@@ -126,14 +126,14 @@
 
 .btn-accent {
     color: #fff;
-    border: 1px solid rgb(var(--accent-pink-rgb) / 0.55);
-    background: rgb(var(--accent-pink-rgb) / 0.09);
-    box-shadow: 0 0 20px rgb(var(--accent-pink-rgb) / 0.15);
+    border: 1px solid rgb(var(--accent-start-rgb) / 0.55);
+    background: rgb(var(--accent-start-rgb) / 0.09);
+    box-shadow: 0 0 20px rgb(var(--accent-start-rgb) / 0.15);
 }
 
 .btn-accent:hover:not(:disabled) {
-    background: rgb(var(--accent-pink-rgb) / 0.18);
-    box-shadow: 0 0 30px rgb(var(--accent-pink-rgb) / 0.28);
+    background: rgb(var(--accent-start-rgb) / 0.18);
+    box-shadow: 0 0 30px rgb(var(--accent-start-rgb) / 0.28);
     transform: translateY(-2px);
 }
 
@@ -176,8 +176,8 @@
 }
 
 .cell.alive {
-    background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-purple) 100%);
-    box-shadow: 0 0 8px rgb(var(--accent-purple-rgb) / 0.6);
+    background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-mid) 100%);
+    box-shadow: 0 0 8px rgb(var(--accent-mid-rgb) / 0.6);
 }
 
 .empty-hint {

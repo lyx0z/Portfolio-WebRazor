@@ -5,6 +5,11 @@ namespace Portfolio.Web.Components;
 /// <summary>
 /// Builds the :root override block for the theme picker.
 ///
+/// The three accents are named by their position in the gradient (start,
+/// mid, end) rather than by colour, because the picker lets any hex go in
+/// any slot. Calling one of them "pink" stops being true the moment
+/// someone drags the picker to green.
+///
 /// This lives in a .cs file rather than inside the .razor @code block on
 /// purpose. Razor locates the end of a @code block by matching braces, and
 /// CSS is full of braces, so building this string inside a component can
@@ -12,15 +17,15 @@ namespace Portfolio.Web.Components;
 /// </summary>
 public static class ThemeCssBuilder
 {
-    public static string Build(string pink, string purple, string blue)
+    public static string Build(string start, string mid, string end)
     {
         return ":root {"
-             + $" --accent-pink: {pink};"
-             + $" --accent-purple: {purple};"
-             + $" --accent-blue: {blue};"
-             + $" --accent-pink-rgb: {ToRgb(pink)};"
-             + $" --accent-purple-rgb: {ToRgb(purple)};"
-             + $" --accent-blue-rgb: {ToRgb(blue)};"
+             + $" --accent-start: {start};"
+             + $" --accent-mid: {mid};"
+             + $" --accent-end: {end};"
+             + $" --accent-start-rgb: {ToRgb(start)};"
+             + $" --accent-mid-rgb: {ToRgb(mid)};"
+             + $" --accent-end-rgb: {ToRgb(end)};"
              + " }";
     }
 

@@ -37,8 +37,8 @@
    set live by the theme picker) without needing colour maths.
 */
 .life-cell.on {
-    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-    box-shadow: 0 0 7px var(--accent-blue);
+    background: linear-gradient(135deg, var(--accent-mid), var(--accent-end));
+    box-shadow: 0 0 7px var(--accent-end);
     opacity: 0.32;
 }
 
