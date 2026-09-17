@@ -1,4 +1,6 @@
 @page "/learning"
+@using Portfolio.Web.Services
+@inject GitHubService GitHub
 
 <PageTitle>Learn with me | lyx0z</PageTitle>
 
@@ -10,6 +12,14 @@
             Every exercise, every rough draft, every thing that took me three tries.
             All of it lives on GitHub so you can follow the same path, or see where I am right now.
         </p>
+
+        @if (liveLoaded)
+        {
+            <span class="live-badge">
+                <span class="live-dot"></span>
+                Live from GitHub
+            </span>
+        }
     </header>
 
     @foreach (var track in tracks)
@@ -23,7 +33,9 @@
             <div class="steps">
                 @foreach (var repo in track.Repos)
                 {
-                    <a class="step @(repo.IsCurrent ? "current" : "")"
+                    var live = Live(repo.Name);
+
+                    <a class="step @(IsCurrent(repo) ? "current" : "")"
                        href="@repo.Url" target="_blank" rel="noopener noreferrer">
                         <div class="step-marker">
                             <span class="step-dot"></span>
@@ -31,16 +43,27 @@
 
                         <div class="step-body">
                             <div class="step-title">
-                                <h3>@repo.Title</h3>
-                                @if (repo.IsCurrent)
+                                <h3>@repo.Name</h3>
+
+                                @if (IsCurrent(repo))
                                 {
                                     <span class="badge-current">Currently here</span>
+                                }
+
+                                @if (live?.LastPushedText is not null)
+                                {
+                                    <span class="badge-updated">updated @live.LastPushedText</span>
                                 }
                             </div>
 
                             <p>@repo.Summary</p>
 
                             <div class="tags">
+                                @if (live?.Language is not null)
+                                {
+                                    <span class="tag tag-strong">@live.Language</span>
+                                }
+
                                 @foreach (var topic in repo.Topics)
                                 {
                                     <span class="tag">@topic</span>
@@ -64,9 +87,64 @@
 </section>
 
 @code {
-    private record Repo(string Title, string Summary, string Url, string[] Topics, bool IsCurrent = false);
+    // Curated content. GitHub has no descriptions or topics set on these repos,
+    // so the prose has to live here. Name must match the GitHub repo name
+    // exactly, that string is the join key between this list and the API.
+    private record Repo(
+        string Name,
+        string Summary,
+        string Url,
+        string[] Topics,
+        bool IsCurrentFallback = false
+    );
 
     private record Track(string Name, string Meta, Repo[] Repos);
+
+    // Live data, keyed by repo name. Empty until the fetch returns, and stays
+    // empty if the fetch fails, which is why every use of it is null checked.
+    private Dictionary<string, GitHubRepo> liveRepos = new(StringComparer.OrdinalIgnoreCase);
+
+    private bool liveLoaded;
+
+    // Name of whichever tracked repo was pushed to most recently.
+    private string? mostRecentlyPushed;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var repos = await GitHub.GetReposAsync();
+
+        if (repos.Count == 0)
+        {
+            return; // offline or rate limited, the static content still renders
+        }
+
+        liveRepos = repos
+            .GroupBy(r => r.Name, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
+
+        // Only consider repos that appear on this page, so pushing to an
+        // unrelated repo does not move the "Currently here" marker.
+        var tracked = tracks.SelectMany(t => t.Repos).Select(r => r.Name);
+
+        mostRecentlyPushed = tracked
+            .Select(Live)
+            .Where(r => r?.PushedAt is not null)
+            .OrderByDescending(r => r!.PushedAt)
+            .FirstOrDefault()
+            ?.Name;
+
+        liveLoaded = true;
+    }
+
+    private GitHubRepo? Live(string name) =>
+        liveRepos.TryGetValue(name, out var repo) ? repo : null;
+
+    // Derived from the API when we have it, falls back to the hand set flag
+    // when we don't, so the page never looks broken offline.
+    private bool IsCurrent(Repo repo) =>
+        mostRecentlyPushed is not null
+            ? string.Equals(mostRecentlyPushed, repo.Name, StringComparison.OrdinalIgnoreCase)
+            : repo.IsCurrentFallback;
 
     private readonly Track[] tracks =
     [
@@ -81,14 +159,14 @@
                 "Cs-Intermediate",
                 "Past the syntax stage. Building bigger exercises where the structure of the code starts to matter as much as whether it runs.",
                 "https://github.com/lyx0z/Cs-Intermediate",
-                ["C#", "Exercises"]
+                ["Exercises"]
             ),
             new Repo(
                 "Cs-Advanced",
-                "The one I'm working through right now. Currently on collections, which is the first topic where picking the wrong tool actually costs you something.",
+                "Collections, which is the first topic where picking the wrong tool actually costs you something.",
                 "https://github.com/lyx0z/Cs-Advanced",
                 ["Collections"],
-                IsCurrent: true
+                IsCurrentFallback: true
             )
         ]),
 
@@ -97,8 +175,7 @@
                 "Rust-Basics",
                 "A Cargo workspace I use to follow the Rust book. Hello World and the guessing game so far. Coming from C#, the borrow checker is the part that keeps humbling me.",
                 "https://github.com/lyx0z/Rust-Basics",
-                ["Cargo", "Hello World", "Guessing game"],
-                IsCurrent: true
+                ["Cargo", "Hello World", "Guessing game"]
             )
         ]),
 
@@ -107,13 +184,19 @@
                 "Notepad",
                 "A text editor in C#. The file handling lives in its own FileUtils project, which was my first go at splitting logic out of the app that uses it.",
                 "https://github.com/lyx0z/Notepad",
-                ["C#", "File IO", "Multi project solution"]
+                ["File IO", "Multi project solution"]
             ),
             new Repo(
                 "GameOfLife",
                 "Conway's Game of Life with a console front end and a web front end sharing one engine. Taught me how to keep rules and rendering apart, and how unit tests make that pay off.",
                 "https://github.com/lyx0z/GameOfLife",
-                ["C#", "Blazor WebAssembly", "NUnit"]
+                ["Blazor WebAssembly", "NUnit"]
+            ),
+            new Repo(
+                "Portfolio-WebRazor",
+                "This site. Blazor WebAssembly, hand written CSS, no component library, deployed from a GitHub Action. The page you are reading pulls its own data from the GitHub API.",
+                "https://github.com/lyx0z/Portfolio-WebRazor",
+                ["Blazor WebAssembly", "CSS", "GitHub Actions"]
             )
         ])
     ];
