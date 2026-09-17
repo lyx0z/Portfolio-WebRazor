@@ -1,0 +1,6 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/css/*", "/img/*", "/favicon.*", "/icon-*.png", "/apple-touch-icon.png", "/_framework/*"]
+  }
+}

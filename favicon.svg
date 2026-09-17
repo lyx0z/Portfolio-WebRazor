@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="64" y2="64">
+      <stop offset="0%" stop-color="#ff4ecd"/>
+      <stop offset="50%" stop-color="#b429f9"/>
+      <stop offset="100%" stop-color="#6f8cff"/>
+    </linearGradient>
+    <linearGradient id="letters" x1="6" y1="0" x2="58" y2="0">
+      <stop offset="0%" stop-color="#ff4ecd"/>
+      <stop offset="50%" stop-color="#c66bff"/>
+      <stop offset="100%" stop-color="#6f8cff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- gradient ring, same treatment as the avatar on the homepage -->
+  <rect x="1" y="1" width="62" height="62" rx="17" fill="url(#ring)"/>
+  <rect x="3.5" y="3.5" width="57" height="57" rx="15" fill="#0a0a10"/>
+
+  <!-- lxz monogram, drawn as paths so it renders identically everywhere -->
+  <g fill="url(#letters)">
+    <!-- l -->
+    <path d="M9 12h6v34.5c0 2 1.4 3 3.4 3 .7 0 1.4-.1 2-.3v5.3c-1 .3-2.3.5-3.8.5-5 0-7.6-2.6-7.6-7.8V12z"/>
+    <!-- x -->
+    <path d="M19 24h6.6L28 28l2.4-4H37l-6.8 13 6.8 13h-6.6L28 46l-2.4 4H19l6.8-13L19 24z"/>
+    <!-- z -->
+    <path d="M40 24h16v6l-11 14h11v6H40v-6l11-14H40v-6z"/>
+  </g>
+</svg>
