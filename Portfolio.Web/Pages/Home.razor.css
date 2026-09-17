@@ -30,8 +30,8 @@
     height: 180px;
     border-radius: 50%;
     padding: 3px;
-    background: linear-gradient(135deg, #ff4ecd, #b429f9 50%, #6f8cff);
-    box-shadow: 0 0 40px rgba(180, 41, 249, 0.35);
+    background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple) 50%, var(--accent-blue));
+    box-shadow: 0 0 40px rgb(var(--accent-purple-rgb) / 0.35);
 }
 
 .avatar img {
@@ -58,7 +58,7 @@
     top: -180px;
     left: 50%;
     transform: translateX(-60%);
-    background: radial-gradient(circle, #b429f9 0%, transparent 70%);
+    background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
 }
 
 .glow-2 {
@@ -67,7 +67,7 @@
     bottom: -220px;
     left: 50%;
     transform: translateX(-10%);
-    background: radial-gradient(circle, #26c4f5 0%, transparent 70%);
+    background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
 }
 
 .eyebrow {
@@ -93,7 +93,7 @@
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, #ff4ecd 0%, #b429f9 45%, #6f8cff 100%);
+    background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-purple) 45%, var(--accent-blue) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -130,15 +130,15 @@
 
 .btn-accent {
     color: #fff;
-    border: 1px solid rgba(255, 78, 205, 0.55);
-    background: rgba(255, 78, 205, 0.07);
-    box-shadow: 0 0 22px rgba(255, 78, 205, 0.16);
+    border: 1px solid rgb(var(--accent-pink-rgb) / 0.55);
+    background: rgb(var(--accent-pink-rgb) / 0.07);
+    box-shadow: 0 0 22px rgb(var(--accent-pink-rgb) / 0.16);
 }
 
 .btn-accent:hover {
     color: #fff;
-    background: rgba(255, 78, 205, 0.16);
-    box-shadow: 0 0 34px rgba(255, 78, 205, 0.3);
+    background: rgb(var(--accent-pink-rgb) / 0.16);
+    box-shadow: 0 0 34px rgb(var(--accent-pink-rgb) / 0.3);
     transform: translateY(-2px);
 }
 
@@ -205,8 +205,8 @@
 }
 
 a.project:hover {
-    border-color: rgba(180, 41, 249, 0.4);
-    background: rgba(180, 41, 249, 0.05);
+    border-color: rgb(var(--accent-purple-rgb) / 0.4);
+    background: rgb(var(--accent-purple-rgb) / 0.05);
     transform: translateY(-3px);
 }
 
@@ -227,8 +227,8 @@ a.project:hover {
     font-size: 1.25rem;
     line-height: 1;
     color: #fff;
-    background: linear-gradient(135deg, rgba(255, 78, 205, 0.25), rgba(180, 41, 249, 0.25));
-    border: 1px solid rgba(180, 41, 249, 0.35);
+    background: linear-gradient(135deg, rgb(var(--accent-pink-rgb) / 0.25), rgb(var(--accent-purple-rgb) / 0.25));
+    border: 1px solid rgb(var(--accent-purple-rgb) / 0.35);
 }
 
 .project-arrow {
@@ -268,14 +268,14 @@ a.project:hover .project-arrow {
     padding: 1.5rem 1.75rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 18px;
-    background: linear-gradient(120deg, rgba(255, 78, 205, 0.07), rgba(111, 140, 255, 0.07));
+    background: linear-gradient(120deg, rgb(var(--accent-pink-rgb) / 0.07), rgb(var(--accent-blue-rgb) / 0.07));
     text-decoration: none;
     color: inherit;
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .learn-banner:hover {
-    border-color: rgba(180, 41, 249, 0.4);
+    border-color: rgb(var(--accent-purple-rgb) / 0.4);
     transform: translateY(-3px);
 }
 
@@ -359,8 +359,8 @@ a.project:hover .project-arrow {
 
 .tag-strong {
     color: #fff;
-    border-color: rgba(180, 41, 249, 0.45);
-    background: rgba(180, 41, 249, 0.12);
+    border-color: rgb(var(--accent-purple-rgb) / 0.45);
+    background: rgb(var(--accent-purple-rgb) / 0.12);
 }
 
 /* ---------- Responsive ---------- */

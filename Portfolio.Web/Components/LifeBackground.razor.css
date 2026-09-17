@@ -1,0 +1,59 @@
+/*
+   A Game of Life grid sitting behind the hero content.
+
+   The grid stretches to fill whatever box it is placed in, using 1fr
+   columns rather than fixed pixel cells, so one modest grid covers any
+   screen size instead of needing hundreds of extra cells on wide monitors.
+*/
+
+.life-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    gap: 2px;
+    padding: 2px;
+    pointer-events: none;
+
+    /* Fades the whole grid out toward the centre and edges so the hero
+       text stays readable and the cells look like they are peeking through
+       rather than sitting on top. */
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, transparent 20%, #000 75%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, transparent 20%, #000 75%);
+}
+
+.life-cell {
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.02);
+    opacity: 1;
+    transition: background 0.5s linear, box-shadow 0.5s linear, opacity 0.5s linear;
+}
+
+/*
+   Opacity on the element rather than a transparent colour, so the cell
+   picks up whatever the theme variables currently are (including anything
+   set live by the theme picker) without needing colour maths.
+*/
+.life-cell.on {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+    box-shadow: 0 0 7px var(--accent-blue);
+    opacity: 0.32;
+}
+
+/* Fewer, chunkier cells on small screens keeps it cheap on phones */
+@media (max-width: 760px) {
+    .life-bg {
+        gap: 3px;
+        mask-image: radial-gradient(ellipse 85% 70% at 50% 45%, transparent 25%, #000 80%);
+        -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 45%, transparent 25%, #000 80%);
+    }
+}
+
+/* Respect visitors who asked their OS to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .life-cell {
+        transition: none;
+    }
+}

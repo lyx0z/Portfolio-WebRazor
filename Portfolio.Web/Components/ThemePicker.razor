@@ -1,0 +1,105 @@
+@*
+    Live palette picker.
+
+    Instead of talking to JavaScript, this renders a real <style> element
+    containing a :root block. Because it comes after css/app.css in the
+    document, its variables win, so every accent on the site re-colours the
+    moment a value changes. Nothing else needs to know this component exists.
+
+    The CSS string itself is built in ThemeCssBuilder.cs, not here, because
+    Razor matches braces to find the end of an @code block and CSS is full
+    of braces.
+*@
+
+<style>@((MarkupString)ThemeCssBuilder.Build(pink, purple, blue))</style>
+
+<div class="theme-picker">
+    <button class="theme-toggle" @onclick="Toggle" title="Theme">
+        <span class="swatch-dot"></span>
+        @(open ? "Close" : "Theme")
+    </button>
+
+    @if (open)
+    {
+        <div class="theme-panel">
+            <div class="panel-head">
+                <strong>Palette</strong>
+                <span>Changes apply instantly</span>
+            </div>
+
+            <label class="row">
+                <input type="color" @bind="pink" @bind:event="oninput" />
+                <span class="row-name">Pink</span>
+                <code>@pink</code>
+            </label>
+
+            <label class="row">
+                <input type="color" @bind="purple" @bind:event="oninput" />
+                <span class="row-name">Purple</span>
+                <code>@purple</code>
+            </label>
+
+            <label class="row">
+                <input type="color" @bind="blue" @bind:event="oninput" />
+                <span class="row-name">Blue</span>
+                <code>@blue</code>
+            </label>
+
+            <div class="preview" style="@PreviewStyle"></div>
+
+            <div class="panel-head presets-head"><strong>Presets</strong></div>
+
+            <div class="presets">
+                @foreach (var preset in presets)
+                {
+                    var current = preset;
+
+                    <button class="preset"
+                            style="@SwatchStyle(current)"
+                            title="@current.Name"
+                            @onclick="() => Apply(current)"></button>
+                }
+            </div>
+
+            <p class="hint">
+                Happy with it? Paste these three into the <code>:root</code> block
+                in <code>wwwroot/css/app.css</code> to make it the default.
+            </p>
+        </div>
+    }
+</div>
+
+@code {
+    private record Preset(string Name, string Pink, string Purple, string Blue);
+
+    private bool open;
+
+    private string pink = "#ff5cc0";
+    private string purple = "#8b5cf6";
+    private string blue = "#3b82f6";
+
+    private readonly Preset[] presets =
+    [
+        new Preset("Blue lean (current)", "#ff5cc0", "#8b5cf6", "#3b82f6"),
+        new Preset("Deep ocean",          "#e879f9", "#7c5cff", "#0ea5e9"),
+        new Preset("Electric cyan",       "#f472b6", "#6366f1", "#22d3ee"),
+        new Preset("Original hot pink",   "#ff4ecd", "#b429f9", "#6f8cff"),
+        new Preset("Ultraviolet",         "#d946ef", "#8b5cf6", "#4f46e5"),
+        new Preset("Ice",                 "#a5b4fc", "#60a5fa", "#38bdf8")
+    ];
+
+    private string PreviewStyle =>
+        "background: linear-gradient(90deg, " + pink + ", " + purple + ", " + blue + ")";
+
+    private static string SwatchStyle(Preset p) =>
+        "background: linear-gradient(135deg, " + p.Pink + ", " + p.Purple + ", " + p.Blue + ")";
+
+    private void Toggle() => open = !open;
+
+    private void Apply(Preset p)
+    {
+        pink = p.Pink;
+        purple = p.Purple;
+        blue = p.Blue;
+    }
+}
