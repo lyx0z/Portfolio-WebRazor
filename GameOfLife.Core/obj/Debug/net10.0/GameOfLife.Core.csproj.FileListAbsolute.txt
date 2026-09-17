@@ -1,0 +1,11 @@
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\bin\Debug\net10.0\GameOfLife.Core.deps.json
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\bin\Debug\net10.0\GameOfLife.Core.dll
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\bin\Debug\net10.0\GameOfLife.Core.pdb
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\GameOfLife.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\GameOfLife.Core.AssemblyInfoInputs.cache
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\GameOfLife.Core.AssemblyInfo.cs
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\GameOfLife.Core.csproj.CoreCompileInputs.cache
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\GameOfLife.Core.dll
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\refint\GameOfLife.Core.dll
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\GameOfLife.Core.pdb
+C:\Users\Mykyta.Kucher\Documents\GitHub\Portfolio\GameOfLife.Core\obj\Debug\net10.0\ref\GameOfLife.Core.dll
