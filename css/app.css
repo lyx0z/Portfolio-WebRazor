@@ -1,13 +1,31 @@
 /* ---------- Theme ---------- */
 
+/*
+   Accents are CSS variables so the whole site can be re-themed from one
+   place. The ThemePicker component overrides these three at runtime, which
+   is why nothing below should hardcode an accent colour.
+
+   Current mix leans blue: pink is still there as the opening note, but
+   purple has moved toward violet and blue carries most of the gradient.
+*/
 :root {
-    --bg: #05050a;
+    --bg: #04060d;
     --text: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.6);
-    --accent-pink: #ff4ecd;
-    --accent-purple: #b429f9;
-    --accent-blue: #6f8cff;
     --border: rgba(255, 255, 255, 0.08);
+
+    /* Accents, as hex for solid fills */
+    --accent-pink: #ff5cc0;
+    --accent-purple: #8b5cf6;
+    --accent-blue: #3b82f6;
+
+    /* The same three as space separated RGB triplets. CSS cannot pull the
+       channels back out of a hex variable, so translucent uses need this
+       second form: rgb(var(--accent-blue-rgb) / 0.35). Keep these in sync
+       with the hex values above. */
+    --accent-pink-rgb: 255 92 192;
+    --accent-purple-rgb: 139 92 246;
+    --accent-blue-rgb: 59 130 246;
 }
 
 /* ---------- Reset (Bootstrap is gone, so we do the basics ourselves) ---------- */
