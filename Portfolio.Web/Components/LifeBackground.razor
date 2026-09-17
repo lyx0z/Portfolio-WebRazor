@@ -1,0 +1,49 @@
+@using GameOfLife.Core
+@implements IDisposable
+
+<div class="life-bg" aria-hidden="true" style="--cols: @Cols; --rows: @Rows;">
+    @if (cells is not null)
+    {
+        @for (var row = 0; row < cells.GetLength(0); row++)
+        {
+            @for (var col = 0; col < cells.GetLength(1); col++)
+            {
+                <div class="life-cell @(cells[row, col] ? "on" : "")"></div>
+            }
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public int Rows { get; set; } = 18;
+    [Parameter] public int Cols { get; set; } = 36;
+
+    /// <summary>Milliseconds between generations. Slower than the playable
+    /// board on purpose, a fast background is distracting.</summary>
+    [Parameter] public int IntervalMs { get; set; } = 600;
+
+    private Game? game;
+    private bool[,]? cells;
+
+    // Set to false by Dispose. Without this the loop would keep running
+    // after the visitor navigates to another page, burning CPU forever.
+    private bool running;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Roughly a quarter of the grid alive gives a pattern that keeps
+        // changing instead of dying out or settling immediately.
+        game = new Game(Cols, Rows, Rows * Cols / 4);
+
+        running = true;
+
+        while (running)
+        {
+            cells = game.GetNextFrame();
+            StateHasChanged();
+            await Task.Delay(IntervalMs);
+        }
+    }
+
+    public void Dispose() => running = false;
+}

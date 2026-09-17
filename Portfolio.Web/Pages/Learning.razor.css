@@ -34,7 +34,7 @@
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, #ff4ecd 0%, #b429f9 50%, #6f8cff 100%);
+    background: linear-gradient(90deg, var(--accent-pink) 0%, var(--accent-purple) 50%, var(--accent-blue) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -61,16 +61,16 @@
     font-size: 0.78rem;
     letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(111, 140, 255, 0.35);
-    background: rgba(111, 140, 255, 0.08);
+    border: 1px solid rgb(var(--accent-blue-rgb) / 0.35);
+    background: rgb(var(--accent-blue-rgb) / 0.08);
 }
 
 .live-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #6f8cff;
-    box-shadow: 0 0 8px rgba(111, 140, 255, 0.9);
+    background: var(--accent-blue);
+    box-shadow: 0 0 8px rgb(var(--accent-blue-rgb) / 0.9);
     animation: live-pulse 2s ease-in-out infinite;
 }
 
@@ -136,7 +136,7 @@
 }
 
 .step:hover {
-    background: rgba(180, 41, 249, 0.05);
+    background: rgb(var(--accent-purple-rgb) / 0.05);
     transform: translateX(3px);
 }
 
@@ -171,13 +171,13 @@
 }
 
 .step:hover .step-dot {
-    border-color: rgba(180, 41, 249, 0.8);
+    border-color: rgb(var(--accent-purple-rgb) / 0.8);
 }
 
 .step.current .step-dot {
-    background: linear-gradient(135deg, #ff4ecd, #b429f9);
+    background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
     border-color: transparent;
-    box-shadow: 0 0 0 4px rgba(180, 41, 249, 0.18), 0 0 14px rgba(180, 41, 249, 0.6);
+    box-shadow: 0 0 0 4px rgb(var(--accent-purple-rgb) / 0.18), 0 0 14px rgb(var(--accent-purple-rgb) / 0.6);
 }
 
 /* ---------- Step content ---------- */
@@ -211,8 +211,8 @@
     font-weight: 500;
     letter-spacing: 0.03em;
     color: #fff;
-    background: rgba(180, 41, 249, 0.22);
-    border: 1px solid rgba(180, 41, 249, 0.5);
+    background: rgb(var(--accent-purple-rgb) / 0.22);
+    border: 1px solid rgb(var(--accent-purple-rgb) / 0.5);
     white-space: nowrap;
 }
 
@@ -242,8 +242,8 @@
 /* The language tag, filled in from the GitHub API rather than hand written */
 .tag-strong {
     color: #fff;
-    border-color: rgba(180, 41, 249, 0.45);
-    background: rgba(180, 41, 249, 0.12);
+    border-color: rgb(var(--accent-purple-rgb) / 0.45);
+    background: rgb(var(--accent-purple-rgb) / 0.12);
 }
 
 .step-arrow {
@@ -291,15 +291,15 @@
 
 .btn-accent {
     color: #fff;
-    border: 1px solid rgba(255, 78, 205, 0.55);
-    background: rgba(255, 78, 205, 0.07);
-    box-shadow: 0 0 22px rgba(255, 78, 205, 0.16);
+    border: 1px solid rgb(var(--accent-pink-rgb) / 0.55);
+    background: rgb(var(--accent-pink-rgb) / 0.07);
+    box-shadow: 0 0 22px rgb(var(--accent-pink-rgb) / 0.16);
 }
 
 .btn-accent:hover {
     color: #fff;
-    background: rgba(255, 78, 205, 0.16);
-    box-shadow: 0 0 34px rgba(255, 78, 205, 0.3);
+    background: rgb(var(--accent-pink-rgb) / 0.16);
+    box-shadow: 0 0 34px rgb(var(--accent-pink-rgb) / 0.3);
     transform: translateY(-2px);
 }
 
