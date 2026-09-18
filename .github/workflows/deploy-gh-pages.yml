@@ -21,6 +21,29 @@ jobs:
       - name: Publish
         run: dotnet publish Portfolio.Web/Portfolio.Web.csproj -c Release -o publish
 
+      # Fetch the repo list here, at deploy time, instead of from the
+      # visitor's browser. Two reasons:
+      #   1. Visitors make zero GitHub API calls, so the 60 requests per hour
+      #      unauthenticated limit stops applying to the site entirely.
+      #   2. This runner is authenticated with the Action's own token, which
+      #      has a far higher limit. The token never leaves the runner, only
+      #      the resulting JSON is published.
+      # jq trims the response to the five fields the site actually uses,
+      # which takes it from roughly 80 fields per repo down to 5.
+      - name: Bake GitHub repo data into repos.json
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl --silent --show-error --fail \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/users/lyx0z/repos?per_page=100&sort=pushed" \
+            | jq '[.[] | {name, html_url, language, pushed_at, stargazers_count}]' \
+            > publish/wwwroot/repos.json
+
+          echo "Baked $(jq 'length' publish/wwwroot/repos.json) repos:"
+          jq -r '.[] | "  \(.name) (\(.language // "none")) pushed \(.pushed_at)"' publish/wwwroot/repos.json
+
       # GitHub Pages serves this repo at /Portfolio-WebRazor/, not at the
       # domain root, so every asset link needs that prefix or they 404.
       - name: Fix base href for the GitHub Pages subpath
