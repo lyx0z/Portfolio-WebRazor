@@ -1,6 +1,7 @@
 # Portfolio
 
 My personal site [lyx0z](https://github.com/lyx0z). Built with Blazor WebAssembly on .NET 10.
+Css Design vibecoded, but give me a few months :)
 
 ## Structure
 
