@@ -1,0 +1,34 @@
+@*
+    Site wide atmosphere, in two halves.
+
+    BACK (behind the page content, z-index 0)
+        grid-lines  faint architectural grid, gives the black some structure
+        haze        two huge slow drifting colour blooms
+        sweep       a wide soft light band that crosses the page now and then
+
+    FRONT (over everything, z-index 100)
+        scanlines   faint horizontal banding
+        grain       animated film grain
+        vignette    darkened edges
+
+    The split matters: anything translucent on the page (cards, panels, the
+    nav bar) now shows the grid and haze through it, while the film effects
+    still coat the whole screen including those panels. One single layer
+    could not do both.
+
+    Everything ignores pointer events, and no images are downloaded: the
+    grain is an inline SVG turbulence filter encoded as a data URL.
+*@
+
+<div class="atmo-back" aria-hidden="true">
+    <div class="grid-lines"></div>
+    <div class="haze haze-warm"></div>
+    <div class="haze haze-cold"></div>
+    <div class="sweep"></div>
+</div>
+
+<div class="atmo-front" aria-hidden="true">
+    <div class="scanlines"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+</div>

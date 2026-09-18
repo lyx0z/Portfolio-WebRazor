@@ -12,16 +12,18 @@
 }
 
 .back-link {
+    /* mono:.back-link */
+    font-family: var(--font-mono);
     display: inline-block;
     margin-bottom: 1.5rem;
     font-size: 0.88rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(242, 236, 228, 0.5);
     text-decoration: none;
     transition: color 0.18s ease;
 }
 
 .back-link:hover {
-    color: #fff;
+    color: var(--text);
 }
 
 .board-header h1 {
@@ -29,7 +31,7 @@
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: #fff;
+    color: var(--text);
 }
 
 .gradient-text {
@@ -45,12 +47,15 @@
     margin: 0 auto;
     font-size: 0.98rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(242, 236, 228, 0.55);
 }
 
 /* ---------- Control panel ---------- */
 
 .panel {
+    /* frost:.panel */
+    backdrop-filter: blur(10px) saturate(115%);
+    -webkit-backdrop-filter: blur(10px) saturate(115%);
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
@@ -58,9 +63,9 @@
     justify-content: space-between;
     padding: 1.5rem;
     margin-bottom: 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(242, 236, 228, 0.08);
+    border-radius: var(--edge);
+    background: rgba(242, 236, 228, 0.014);
 }
 
 .controls {
@@ -76,19 +81,21 @@
 }
 
 .controls span {
+    /* mono:.controls span */
+    font-family: var(--font-mono);
     font-size: 0.78rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(242, 236, 228, 0.45);
 }
 
 .controls input {
     width: 108px;
     padding: 0.6rem 0.8rem;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
+    border-radius: var(--edge);
+    border: 1px solid rgba(242, 236, 228, 0.12);
+    background: rgba(242, 236, 228, 0.04);
+    color: var(--text);
     font-size: 0.95rem;
     font-family: inherit;
 }
@@ -108,11 +115,13 @@
 }
 
 .btn {
-    padding: 0.7rem 1.5rem;
-    border-radius: 999px;
-    font-size: 0.92rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--edge);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     font-weight: 500;
-    font-family: inherit;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     cursor: pointer;
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
@@ -125,7 +134,7 @@
 }
 
 .btn-accent {
-    color: #fff;
+    color: var(--text);
     border: 1px solid rgb(var(--accent-start-rgb) / 0.55);
     background: rgb(var(--accent-start-rgb) / 0.09);
     box-shadow: 0 0 20px rgb(var(--accent-start-rgb) / 0.15);
@@ -138,24 +147,27 @@
 }
 
 .btn-ghost {
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text);
+    border: 1px solid rgba(242, 236, 228, 0.2);
     background: transparent;
 }
 
 .btn-ghost:hover:not(:disabled) {
-    border-color: rgba(255, 255, 255, 0.45);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(242, 236, 228, 0.45);
+    background: rgba(242, 236, 228, 0.05);
     transform: translateY(-2px);
 }
 
 /* ---------- Board ---------- */
 
 .board {
+    /* frost:.board */
+    backdrop-filter: blur(10px) saturate(115%);
+    -webkit-backdrop-filter: blur(10px) saturate(115%);
     display: inline-block;
     padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
+    border: 1px solid rgba(242, 236, 228, 0.08);
+    border-radius: var(--edge);
     background: rgba(0, 0, 0, 0.35);
 }
 
@@ -172,7 +184,7 @@
 }
 
 .cell.dead {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(242, 236, 228, 0.04);
 }
 
 .cell.alive {
@@ -181,12 +193,12 @@
 }
 
 .empty-hint {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(242, 236, 228, 0.45);
     font-size: 0.95rem;
 }
 
 .empty-hint strong {
-    color: #fff;
+    color: var(--text);
     font-weight: 500;
 }
 

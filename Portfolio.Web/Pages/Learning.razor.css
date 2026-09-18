@@ -13,24 +13,25 @@
 
 .eyebrow {
     display: inline-block;
-    padding: 0.4rem 0.9rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 999px;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+    padding: 0.45rem 0.9rem;
+    margin-bottom: 1.6rem;
+    border: 1px solid rgb(var(--accent-start-rgb) / 0.3);
+    border-radius: var(--edge);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.03);
+    color: var(--accent-start);
+    background: rgb(var(--accent-start-rgb) / 0.05);
 }
 
 .learn-header h1 {
     margin: 0 0 1.1rem;
-    font-size: clamp(2rem, 5.5vw, 3.1rem);
-    line-height: 1.12;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #fff;
+    font-size: clamp(2.1rem, 5.8vw, 3.3rem);
+    line-height: 1.04;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text);
 }
 
 .gradient-text {
@@ -46,21 +47,23 @@
     margin: 0 auto;
     font-size: 1rem;
     line-height: 1.75;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(242, 236, 228, 0.55);
 }
 
 /* ---------- Live from GitHub indicator ---------- */
 
 .live-badge {
+    /* mono:.live-badge */
+    font-family: var(--font-mono);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     margin-top: 1.5rem;
     padding: 0.35rem 0.85rem;
-    border-radius: 999px;
+    border-radius: var(--edge);
     font-size: 0.78rem;
     letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(242, 236, 228, 0.65);
     border: 1px solid rgb(var(--accent-end-rgb) / 0.35);
     background: rgb(var(--accent-end-rgb) / 0.08);
 }
@@ -80,13 +83,15 @@
 }
 
 .badge-updated {
+    /* mono:.badge-updated */
+    font-family: var(--font-mono);
     padding: 0.2rem 0.55rem;
-    border-radius: 999px;
+    border-radius: var(--edge);
     font-size: 0.7rem;
     letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.03);
+    color: rgba(242, 236, 228, 0.45);
+    border: 1px solid rgba(242, 236, 228, 0.1);
+    background: rgba(242, 236, 228, 0.03);
     white-space: nowrap;
 }
 
@@ -102,20 +107,25 @@
     gap: 0.9rem;
     margin-bottom: 1.5rem;
     padding-bottom: 0.9rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    border-bottom: 1px solid rgba(242, 236, 228, 0.07);
 }
 
 .track-head h2 {
     margin: 0;
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: -0.01em;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
 }
 
 .track-meta {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.38);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(242, 236, 228, 0.3);
 }
 
 /* ---------- Steps (the vertical path) ---------- */
@@ -131,7 +141,7 @@
     padding: 1.4rem 1.5rem 1.4rem 0;
     text-decoration: none;
     color: inherit;
-    border-radius: 14px;
+    border-radius: var(--edge);
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
@@ -157,15 +167,15 @@
     left: 50%;
     width: 2px;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(242, 236, 228, 0.1);
 }
 
 .step-dot {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: #12121c;
-    border: 2px solid rgba(255, 255, 255, 0.28);
+    background: var(--bg);
+    border: 2px solid rgba(242, 236, 228, 0.28);
     z-index: 1;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
@@ -199,18 +209,20 @@
     margin: 0;
     font-size: 1.05rem;
     font-weight: 600;
-    color: #fff;
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    color: var(--text);
+    font-family: var(--font-mono);
     letter-spacing: -0.01em;
 }
 
 .badge-current {
+    /* mono:.badge-current */
+    font-family: var(--font-mono);
     padding: 0.2rem 0.6rem;
-    border-radius: 999px;
+    border-radius: var(--edge);
     font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.03em;
-    color: #fff;
+    color: var(--text);
     background: rgb(var(--accent-mid-rgb) / 0.22);
     border: 1px solid rgb(var(--accent-mid-rgb) / 0.5);
     white-space: nowrap;
@@ -220,7 +232,7 @@
     margin: 0 0 0.9rem;
     font-size: 0.92rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(242, 236, 228, 0.55);
 }
 
 .tags {
@@ -230,18 +242,20 @@
 }
 
 .tag {
+    /* mono:.tag */
+    font-family: var(--font-mono);
     padding: 0.25rem 0.65rem;
-    border-radius: 999px;
+    border-radius: var(--edge);
     font-size: 0.78rem;
     line-height: 1.4;
-    color: rgba(255, 255, 255, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.03);
+    color: rgba(242, 236, 228, 0.58);
+    border: 1px solid rgba(242, 236, 228, 0.1);
+    background: rgba(242, 236, 228, 0.03);
 }
 
 /* The language tag, filled in from the GitHub API rather than hand written */
 .tag-strong {
-    color: #fff;
+    color: var(--text);
     border-color: rgb(var(--accent-mid-rgb) / 0.45);
     background: rgb(var(--accent-mid-rgb) / 0.12);
 }
@@ -251,53 +265,59 @@
     align-self: flex-start;
     padding-top: 0.15rem;
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(242, 236, 228, 0.25);
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .step:hover .step-arrow {
-    color: #fff;
+    color: var(--text);
     transform: translate(2px, -2px);
 }
 
 /* ---------- Bottom call to action ---------- */
 
 .learn-cta {
+    /* frost:.learn-cta */
+    backdrop-filter: blur(10px) saturate(115%);
+    -webkit-backdrop-filter: blur(10px) saturate(115%);
     margin-top: 1rem;
     padding: 2.5rem 2rem;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(242, 236, 228, 0.08);
+    border-radius: var(--edge);
+    background: rgba(242, 236, 228, 0.014);
 }
 
 .learn-cta p {
     margin: 0 0 1.5rem;
     font-size: 0.98rem;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(242, 236, 228, 0.55);
 }
 
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.8rem 1.8rem;
-    border-radius: 999px;
-    font-size: 0.95rem;
+    padding: 0.85rem 1.8rem;
+    border-radius: var(--edge);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     text-decoration: none;
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .btn-accent {
-    color: #fff;
+    color: var(--text);
     border: 1px solid rgb(var(--accent-start-rgb) / 0.55);
     background: rgb(var(--accent-start-rgb) / 0.07);
     box-shadow: 0 0 22px rgb(var(--accent-start-rgb) / 0.16);
 }
 
 .btn-accent:hover {
-    color: #fff;
+    color: var(--text);
     background: rgb(var(--accent-start-rgb) / 0.16);
     box-shadow: 0 0 34px rgb(var(--accent-start-rgb) / 0.3);
     transform: translateY(-2px);

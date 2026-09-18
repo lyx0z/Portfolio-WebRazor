@@ -1,4 +1,11 @@
+/*
+   z-index 1 lifts the whole page above Atmosphere's back layer (z-index 0),
+   so the grid, haze and light sweep sit behind the content and show through
+   anything translucent. Without this the back layer would paint over the page.
+*/
 .page {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -19,16 +26,16 @@ main {
     gap: 0.75rem 1.5rem;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    color: rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(242, 236, 228, 0.06);
+    color: rgba(242, 236, 228, 0.4);
     font-size: 0.85rem;
 }
 
 .site-footer a {
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(242, 236, 228, 0.55);
     text-decoration: none;
 }
 
 .site-footer a:hover {
-    color: #fff;
+    color: var(--text);
 }

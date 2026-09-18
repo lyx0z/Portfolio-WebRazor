@@ -78,9 +78,10 @@
     private record Preset(string Name, string Start, string Mid, string End);
 
     // The defaults, kept in one place so Reset has something to point at.
-    private const string DefaultStart = "#ff5cc0";
-    private const string DefaultMid = "#8b5cf6";
-    private const string DefaultEnd = "#3b82f6";
+    // These must match the :root block in wwwroot/css/app.css.
+    private const string DefaultStart = "#ffa53d";
+    private const string DefaultMid = "#d9613c";
+    private const string DefaultEnd = "#4c9ba3";
 
     private bool open;
 
@@ -90,7 +91,8 @@
 
     private readonly Preset[] presets =
     [
-        new Preset("Default",  "#ff5cc0", "#8b5cf6", "#3b82f6"),
+        new Preset("Default",  "#ffa53d", "#d9613c", "#4c9ba3"),
+        new Preset("Neon",     "#ff5cc0", "#8b5cf6", "#3b82f6"),
         new Preset("Spring",   "#5cffce", "#69f75f", "#3b82f6"),
         new Preset("Aurora",   "#00ffe1", "#5fb5f7", "#3bf7a6"),
         new Preset("Sunrise",  "#fff700", "#f75fc7", "#ce3bf7"),

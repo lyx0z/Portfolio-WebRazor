@@ -16,13 +16,13 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1rem;
-    border-radius: 999px;
+    border-radius: var(--edge);
     font-size: 0.85rem;
     font-family: inherit;
-    color: #fff;
+    color: var(--text);
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(12, 12, 20, 0.85);
+    border: 1px solid rgba(242, 236, 228, 0.14);
+    background: rgba(14, 11, 8, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transition: border-color 0.18s ease, transform 0.18s ease;
@@ -45,9 +45,9 @@
 .theme-panel {
     width: 265px;
     padding: 1.1rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(10, 10, 16, 0.94);
+    border-radius: var(--edge);
+    border: 1px solid rgba(242, 236, 228, 0.1);
+    background: rgba(12, 9, 7, 0.95);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
@@ -65,12 +65,12 @@
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(242, 236, 228, 0.55);
 }
 
 .panel-head span {
     font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(242, 236, 228, 0.3);
 }
 
 .presets-head {
@@ -91,8 +91,8 @@
     width: 34px;
     height: 34px;
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 9px;
+    border: 1px solid rgba(242, 236, 228, 0.16);
+    border-radius: var(--edge);
     background: none;
     cursor: pointer;
 }
@@ -104,18 +104,18 @@
 
 .row input[type="color"]::-webkit-color-swatch {
     border: none;
-    border-radius: 6px;
+    border-radius: var(--edge);
 }
 
 .row-name {
     flex: 1;
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(242, 236, 228, 0.75);
 }
 
 .row code {
     font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(242, 236, 228, 0.4);
     font-family: ui-monospace, Menlo, Consolas, monospace;
 }
 
@@ -124,30 +124,30 @@
 .preview {
     height: 26px;
     margin-top: 0.9rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--edge);
+    border: 1px solid rgba(242, 236, 228, 0.1);
 }
 
 /* ---------- Presets ---------- */
 
 .presets {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 0.4rem;
 }
 
 .preset {
     height: 30px;
     padding: 0;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--edge);
+    border: 1px solid rgba(242, 236, 228, 0.14);
     cursor: pointer;
     transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .preset:hover {
     transform: translateY(-2px) scale(1.05);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(242, 236, 228, 0.5);
 }
 
 /* ---------- Reset ---------- */
@@ -156,19 +156,19 @@
     width: 100%;
     margin-top: 0.9rem;
     padding: 0.5rem;
-    border-radius: 9px;
+    border-radius: var(--edge);
     font-size: 0.8rem;
     font-family: inherit;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(242, 236, 228, 0.6);
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(242, 236, 228, 0.12);
+    background: rgba(242, 236, 228, 0.03);
     transition: color 0.18s ease, border-color 0.18s ease;
 }
 
 .reset:hover {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.35);
+    color: var(--text);
+    border-color: rgba(242, 236, 228, 0.35);
 }
 
 /* ---------- Hint ---------- */
@@ -177,11 +177,11 @@
     margin: 1rem 0 0;
     font-size: 0.72rem;
     line-height: 1.55;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(242, 236, 228, 0.35);
 }
 
 .hint code {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(242, 236, 228, 0.6);
     font-family: ui-monospace, Menlo, Consolas, monospace;
 }
 

@@ -1,0 +1,207 @@
+/* ============================================================
+   BACK LAYER, behind the page content
+   ============================================================ */
+
+.atmo-back {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ---------- Architectural grid ---------- */
+
+/*
+   Two 1px gradients crossed into a grid. Barely visible on purpose: it
+   gives flat black a sense of structure and scale without becoming a
+   pattern you consciously look at. Masked so it fades away toward the
+   edges rather than stopping at a hard line.
+*/
+.grid-lines {
+    position: absolute;
+    inset: -1px;
+    background-image:
+        linear-gradient(to right, rgba(242, 236, 228, 0.032) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(242, 236, 228, 0.032) 1px, transparent 1px);
+    background-size: 92px 92px;
+    mask-image: radial-gradient(ellipse 85% 65% at 50% 32%, #000 15%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 32%, #000 15%, transparent 78%);
+}
+
+/* ---------- Haze: two slow drifting colour blooms ---------- */
+
+/*
+   45s and 60s are deliberately not multiples of each other, so the two
+   never settle into a visible repeating rhythm.
+*/
+.haze {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    will-change: transform;
+}
+
+.haze-warm {
+    width: 70vw;
+    height: 70vw;
+    top: -25vw;
+    left: -15vw;
+    background: radial-gradient(circle, rgb(var(--accent-start-rgb) / 0.20) 0%, transparent 65%);
+    animation: drift-warm 45s ease-in-out infinite alternate;
+}
+
+.haze-cold {
+    width: 60vw;
+    height: 60vw;
+    bottom: -20vw;
+    right: -10vw;
+    background: radial-gradient(circle, rgb(var(--accent-end-rgb) / 0.16) 0%, transparent 65%);
+    animation: drift-cold 60s ease-in-out infinite alternate;
+}
+
+@keyframes drift-warm {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to   { transform: translate3d(8vw, 6vh, 0) scale(1.15); }
+}
+
+@keyframes drift-cold {
+    from { transform: translate3d(0, 0, 0) scale(1.1); }
+    to   { transform: translate3d(-7vw, -5vh, 0) scale(1); }
+}
+
+/* ---------- Light sweep ---------- */
+
+/*
+   A tilted band of faint warm light that crosses the screen every 34
+   seconds, fading in and out at the ends so it never obviously enters or
+   exits. This is the one thing on the page that makes it feel like a room
+   with a light source rather than a flat surface.
+*/
+.sweep {
+    position: absolute;
+    top: -25%;
+    left: -45%;
+    width: 38%;
+    height: 150%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgb(var(--accent-start-rgb) / 0.05) 45%,
+        rgb(var(--accent-start-rgb) / 0.05) 55%,
+        transparent 100%
+    );
+    filter: blur(55px);
+    animation: sweep-across 34s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes sweep-across {
+    0%   { transform: translateX(0) rotate(14deg);    opacity: 0; }
+    15%  { opacity: 1; }
+    85%  { opacity: 1; }
+    100% { transform: translateX(300%) rotate(14deg); opacity: 0; }
+}
+
+/* ============================================================
+   FRONT LAYER, over everything including translucent panels
+   ============================================================ */
+
+.atmo-front {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ---------- Scanlines ---------- */
+
+.scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.14) 0px,
+        rgba(0, 0, 0, 0.14) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    opacity: 0.45;
+}
+
+/* ---------- Film grain ---------- */
+
+/*
+   Dialled back from 0.09 to 0.04. Present as texture, no longer reading
+   as visible noise over the type.
+*/
+.grain {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain-crawl 0.7s steps(5) infinite;
+    will-change: transform;
+}
+
+@keyframes grain-crawl {
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(-3%, -4%); }
+    40%  { transform: translate(-6%, 2%); }
+    60%  { transform: translate(2%, -3%); }
+    80%  { transform: translate(-1%, 5%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* ---------- Vignette ---------- */
+
+.vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse 100% 85% at 50% 45%,
+        transparent 42%,
+        rgba(0, 0, 0, 0.42) 100%
+    );
+}
+
+/* ---------- Accessibility and cheap devices ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .haze,
+    .grain,
+    .sweep {
+        animation: none;
+    }
+
+    /* Park the sweep off screen rather than freezing it mid-page */
+    .sweep {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .grain {
+        opacity: 0.028;
+        animation-duration: 1.1s;
+    }
+
+    .haze {
+        filter: blur(90px);
+    }
+
+    /* Tighter grid reads better on a narrow viewport */
+    .grid-lines {
+        background-size: 58px 58px;
+    }
+
+    /* Sweep is the least visible and most expensive effect on a phone */
+    .sweep {
+        display: none;
+    }
+}
