@@ -1,0 +1,23 @@
+/*
+   Tabular figures and a fixed character width stop the line from reflowing
+   as glyphs swap in and out. Without this the text jitters horizontally
+   while it decodes, which looks like a bug rather than an effect.
+*/
+.decode {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    white-space: pre;
+}
+
+/*
+   Reduced motion: the component still runs its loop, but hiding the
+   intermediate frames is not possible from CSS alone. Instead the scramble
+   is made invisible by removing the only thing that makes it feel like
+   motion, the per-frame colour shift, leaving a plain settle.
+*/
+@media (prefers-reduced-motion: reduce) {
+    .decode {
+        /* No transition, no shimmer. The text still lands correctly. */
+        animation: none;
+    }
+}

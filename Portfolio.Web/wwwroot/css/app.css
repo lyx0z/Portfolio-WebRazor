@@ -172,3 +172,76 @@ code {
 .loading-progress-text:after {
     content: var(--blazor-load-percentage-text, "Loading");
 }
+
+/* ---------- Scroll reveals ---------- */
+
+/*
+   Sections fade and rise as they scroll into view.
+
+   This is scroll driven animation: animation-timeline: view() ties the
+   animation's progress to the element's position in the viewport rather
+   than to elapsed time, so it runs entirely on the compositor with no
+   JavaScript and no scroll listeners.
+
+   Wrapped in @supports so browsers without it simply show everything
+   normally. That is the important part: if the feature is missing, content
+   must not be left invisible.
+*/
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            animation: reveal linear both;
+            animation-timeline: view();
+
+            /* Starts as the element enters the lower fifth of the viewport,
+               finishes once it is 45% of the way up. Ending well before the
+               centre means content is fully readable by the time the eye
+               reaches it. */
+            animation-range: entry 15% cover 45%;
+        }
+    }
+}
+
+/* ---------- Scroll progress line ---------- */
+
+/*
+   A 2px accent line across the top that fills as the document scrolls.
+   scroll() binds to the root scroller, so again no JavaScript.
+*/
+@supports (animation-timeline: scroll()) {
+    .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        z-index: 120;
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+        background: linear-gradient(
+            90deg,
+            var(--accent-start),
+            var(--accent-mid) 55%,
+            var(--accent-end)
+        );
+        box-shadow: 0 0 10px rgb(var(--accent-start-rgb) / 0.5);
+        animation: progress-grow linear;
+        animation-timeline: scroll();
+    }
+
+    @keyframes progress-grow {
+        from { transform: scaleX(0); }
+        to   { transform: scaleX(1); }
+    }
+}

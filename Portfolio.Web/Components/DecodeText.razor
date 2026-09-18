@@ -1,0 +1,102 @@
+@implements IDisposable
+
+@*
+    Resolves scrambled characters into the real text, one position at a
+    time, like a readout locking on.
+
+    Same async loop you already know from the Game of Life board: mutate
+    state, ask for a render, await a delay so the browser can paint. The
+    only new idea is that each character has its own settle time, so the
+    text resolves raggedly rather than all at once, which reads as decoding
+    rather than a wipe.
+*@
+
+<span class="decode">@display</span>
+
+@code {
+    [Parameter, EditorRequired] public string Text { get; set; } = "";
+
+    /// <summary>Milliseconds between frames. 45ms is about 22 frames a
+    /// second, fast enough to blur but slow enough to read as movement.</summary>
+    [Parameter] public int FrameMs { get; set; } = 45;
+
+    /// <summary>Frames before the first character locks in. Every character
+    /// after it locks one frame later.</summary>
+    [Parameter] public int SettleFrames { get; set; } = 8;
+
+    /// <summary>Delay before starting, so staggered lines feel deliberate.</summary>
+    [Parameter] public int DelayMs { get; set; }
+
+    private const string Glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&/\\<>*+=-_";
+
+    private readonly Random random = new();
+
+    private string display = "";
+    private bool running;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Anyone who asked their OS to reduce motion just gets the text.
+        // There is no JS interop here to read the media query, so this is
+        // handled in CSS instead: see .decode in the stylesheet.
+        display = new string(' ', Text.Length);
+        running = true;
+
+        if (DelayMs > 0)
+        {
+            await Task.Delay(DelayMs);
+        }
+
+        var frame = 0;
+
+        // Total frames: enough for the last character to settle, plus a
+        // couple so the final state is definitely painted.
+        var totalFrames = SettleFrames + Text.Length + 2;
+
+        while (running && frame <= totalFrames)
+        {
+            display = Scramble(frame);
+            StateHasChanged();
+
+            await Task.Delay(FrameMs);
+            frame++;
+        }
+
+        // Guarantee the real text, whatever happened above.
+        if (running)
+        {
+            display = Text;
+            StateHasChanged();
+        }
+    }
+
+    /// <summary>
+    /// Characters whose settle frame has passed show their real value.
+    /// Everything else shows a random glyph. Spaces are never scrambled,
+    /// so word shapes stay recognisable while the letters resolve.
+    /// </summary>
+    private string Scramble(int frame)
+    {
+        var chars = new char[Text.Length];
+
+        for (var i = 0; i < Text.Length; i++)
+        {
+            if (Text[i] == ' ')
+            {
+                chars[i] = ' ';
+            }
+            else if (frame >= SettleFrames + i)
+            {
+                chars[i] = Text[i];
+            }
+            else
+            {
+                chars[i] = Glyphs[random.Next(Glyphs.Length)];
+            }
+        }
+
+        return new string(chars);
+    }
+
+    public void Dispose() => running = false;
+}

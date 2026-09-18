@@ -49,6 +49,20 @@ jobs:
       - name: Fix base href for the GitHub Pages subpath
         run: sed -i 's|<base href="/" />|<base href="/Portfolio-WebRazor/" />|' publish/wwwroot/index.html
 
+      # Browsers cache index.html and the CSS aggressively, and a Blazor WASM
+      # app will happily keep running a previous build from cache after a
+      # deploy. Stamping the commit SHA onto each asset URL gives every
+      # deploy unique paths, so a stale cache entry can never be reused.
+      # Blazor's own _framework files are already content-hashed, so only the
+      # hand written assets need this.
+      - name: Cache bust assets with the commit SHA
+        run: |
+          SHA="${GITHUB_SHA::8}"
+          sed -i "s|css/app.css|css/app.css?v=$SHA|g" publish/wwwroot/index.html
+          sed -i "s|Portfolio.Web.styles.css|Portfolio.Web.styles.css?v=$SHA|g" publish/wwwroot/index.html
+          echo "Stamped assets with v=$SHA"
+          grep -o '"[^"]*?v=[^"]*"' publish/wwwroot/index.html || true
+
       - name: SPA fallback + disable Jekyll processing
         run: |
           touch publish/wwwroot/.nojekyll
