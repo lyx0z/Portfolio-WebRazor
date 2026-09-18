@@ -5,27 +5,38 @@
    place. The ThemePicker component overrides these three at runtime, which
    is why nothing below should hardcode an accent colour.
 
-   Current mix leans blue: pink is still there as the opening note, but
-   purple has moved toward violet and blue carries most of the gradient.
+   The mix is warm amber into burnt copper into cold teal. Two temperatures
+   in tension rather than three neighbouring neons, which is what stops it
+   reading as synthwave. Everything is deliberately desaturated: dusty, not
+   glowing.
 */
 :root {
-    --bg: #04060d;
-    --text: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.6);
-    --border: rgba(255, 255, 255, 0.08);
+    /* Warm near-black. Not pure black, and not blue-black either, so the
+       amber haze has something to sit against. */
+    --bg: #0a0806;
+
+    --text: #f2ece4;
+    --text-muted: rgba(242, 236, 228, 0.52);
+    --border: rgba(242, 236, 228, 0.09);
 
     /* Accents, as hex for solid fills */
-    --accent-start: #ff5cc0;
-    --accent-mid: #8b5cf6;
-    --accent-end: #3b82f6;
+    --accent-start: #ffa53d;
+    --accent-mid: #d9613c;
+    --accent-end: #4c9ba3;
 
     /* The same three as space separated RGB triplets. CSS cannot pull the
        channels back out of a hex variable, so translucent uses need this
        second form: rgb(var(--accent-end-rgb) / 0.35). Keep these in sync
        with the hex values above. */
-    --accent-start-rgb: 255 92 192;
-    --accent-mid-rgb: 139 92 246;
-    --accent-end-rgb: 59 130 246;
+    --accent-start-rgb: 255 165 61;
+    --accent-mid-rgb: 217 97 60;
+    --accent-end-rgb: 76 155 163;
+
+    /* Technical labels, small caps, readouts */
+    --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+
+    /* Hard edges instead of pills. One value so it can be changed once. */
+    --edge: 2px;
 }
 
 /* ---------- Reset (Bootstrap is gone, so we do the basics ourselves) ---------- */
